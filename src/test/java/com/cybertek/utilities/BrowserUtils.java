@@ -124,9 +124,9 @@ public class BrowserUtils {
      */
     public static void verifyElementDisplayed(By by) {
         try {
-            assertTrue(Driver.getDriver().findElement(by).isDisplayed(), "Element not visible: "+by);
+            assertTrue("Element not visible: "+by, Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
-            fail("Element not found: " + by);
+            Assert.fail("Element not found: " + by);
 
         }
     }
@@ -138,12 +138,13 @@ public class BrowserUtils {
      */
     public static void verifyElementDisplayed(WebElement element) {
         try {
-            assertTrue(element.isDisplayed(), "Element not visible: "+element);
+            assertTrue("Element not visible: "+element, element.isDisplayed());
         } catch (NoSuchElementException e) {
-            fail("Element not found: " + element);
+            Assert.fail("Element not found: " + element);
 
         }
     }
+
 
     /**
      * Waits for element to be not stale
