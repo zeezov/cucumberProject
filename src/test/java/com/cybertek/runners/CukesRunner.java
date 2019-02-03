@@ -7,10 +7,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/homepage.feature",
+        features = "src/test/resources/features",
         glue = "com/cybertek/step_definitions"
-        , dryRun = true
-        , tags = "@member, @teacher"
+        , dryRun = false
+        , tags = "@wip"
 )
 public class CukesRunner {
 }
