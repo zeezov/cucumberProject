@@ -18,4 +18,7 @@ public class MapPage {
     @FindBy(className = "map")
     public WebElement map;
 
+    @FindBy(className = "subtitle")
+    public WebElement location;
+
 }

@@ -1,4 +1,4 @@
-@login @wip
+@login
 Feature: Home page
   As a user, when I enter correct login information,
   I should be able to login
