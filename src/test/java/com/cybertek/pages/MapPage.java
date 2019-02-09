@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class MapPage {
 
     public MapPage() {
@@ -20,5 +22,8 @@ public class MapPage {
 
     @FindBy(className = "subtitle")
     public WebElement location;
+
+    @FindBy(css = "a>span.room-name")
+    public List<WebElement> allRooms;
 
 }
