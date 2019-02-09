@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class MapPage {
+public class MapPage extends NavigationMenu {
 
     public MapPage() {
         PageFactory.initElements(Driver.getDriver(),

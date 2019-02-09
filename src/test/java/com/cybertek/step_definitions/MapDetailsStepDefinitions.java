@@ -4,7 +4,6 @@ import com.cybertek.pages.MapPage;
 import com.cybertek.utilities.BrowserUtils;
 import cucumber.api.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
