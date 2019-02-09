@@ -1,11 +1,13 @@
 package com.cybertek.step_definitions;
 
 import com.cybertek.pages.MapPage;
+import com.cybertek.pages.MyTeamPage;
 import com.cybertek.utilities.BrowserUtils;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MapDetailsStepDefinitions {
@@ -19,7 +21,7 @@ public class MapDetailsStepDefinitions {
         // and returning it as a list of string using the utility method
         List<String> allRooms = BrowserUtils.getElementsText(mapPage.allRooms);
         // verify that list contains the expected room name
-        Assert.assertTrue("Room was not found: "+roomName, allRooms.contains(roomName));
+        Assert.assertTrue("Room was not found: " + roomName, allRooms.contains(roomName));
 
     }
 
@@ -34,7 +36,8 @@ public class MapDetailsStepDefinitions {
     @When("the user goes to the {string} page")
     public void the_user_goes_to_the_page(String page) {
         MapPage mapPage = new MapPage();
-        switch (page){
+        // TODO add my schedule and general schedule
+        switch (page) {
             case "map":
                 mapPage.map.click();
                 break;
@@ -52,15 +55,16 @@ public class MapDetailsStepDefinitions {
     }
 
     @Then("following team members should be displayed:")
-    public void following_team_members_should_be_displayed(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new cucumber.api.PendingException();
+    public void following_team_members_should_be_displayed(List<String> members) {
+        System.out.println(members);
+// get the list of all the members in a string list
+        MyTeamPage myTeam = new MyTeamPage();
+
+        List<String> actualMembers = BrowserUtils.getElementsText(myTeam.allNames);
+
+        Assert.assertEquals(members.size(), actualMembers.size());
+        Assert.assertTrue(members.containsAll(actualMembers));
+
     }
 
 

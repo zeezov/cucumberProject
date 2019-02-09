@@ -20,11 +20,12 @@ Feature: Map page details
     And user logs in using "ucharlot7y@nbcnews.com" and "archibaldmelloy"
     When the user goes to the "my team" page
     Then following team members should be displayed:
+      | Archibald |
       | Leonard   |
       | Lorette   |
       | Durant    |
-      | Archibald |
 
 # shortcut to format file in intellij
 # CMD+OPTION+L  mac
 # CMTR+ALT+L    win
+  # Kasim go 
