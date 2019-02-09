@@ -14,7 +14,7 @@ Feature: Map page details
       | yale      |
       | princeton |
 
-  @wip
+
   Scenario: Team members test
     Given user on the login page
     And user logs in using "ucharlot7y@nbcnews.com" and "archibaldmelloy"
@@ -28,4 +28,4 @@ Feature: Map page details
 # shortcut to format file in intellij
 # CMD+OPTION+L  mac
 # CMTR+ALT+L    win
-  # Kasim go 
+  # Kasim go
