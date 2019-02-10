@@ -20,7 +20,6 @@ Feature: campus locations
     Then location should be "il"
 
 
-  @wip
   Scenario Outline: Verify campus names <email>
     Given user on the login page
     When user logs in using "<email>" and "<password>"
