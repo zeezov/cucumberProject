@@ -127,7 +127,7 @@ public class ExcelUtil {
     }
 
     public int rowCount() {
-        return workSheet.getLastRowNum();
+        return workSheet.getLastRowNum()+1;
     }
 
 }
