@@ -1,6 +1,7 @@
 package com.cybertek.step_definitions;
 
 import com.cybertek.pages.MapPage;
+import com.cybertek.pages.MySelfPage;
 import com.cybertek.pages.RoomPage;
 import com.cybertek.pages.SignInPage;
 import com.cybertek.utilities.ExcelUtil;
@@ -65,6 +66,9 @@ public class RoomDetailsStepDefinitions {
 
     @When("my self page should display personal information for that user")
     public void my_self_page_should_display_personal_information_for_that_user() {
+        // open the myself page
+        new MapPage().goToSelf();
+
         // get the excel data
         String file = "./src/test/resources/test_data/light-side-test-data.xlsx";
         String sheet = "light-side-users";
@@ -81,15 +85,43 @@ public class RoomDetailsStepDefinitions {
         // and itirate through each map
         // each map represents one row from the excel, each row represents one user
 
-        for(Map<String, String> user: usersMapList){
-            System.out.println(user);
-            // check if the currentuseremai lvalue matches the value in the map
+        for (Map<String, String> user : usersMapList) {
+            // check if the currentuseremail value matches the value in the map
+            if (SignInPage.currentUserEmail.equalsIgnoreCase(user.get("email"))) {
+                System.out.println(user);
+                // get the actual information from UI
+                // compare
+                MySelfPage mySelfPage = new MySelfPage();
+//               verify name
+                String expectedName = user.get("name");
+                String actualName = mySelfPage.name.getText();
+                Assert.assertEquals(expectedName, actualName);
+//                verify role
+                String expectedRole = user.get("role");
+                String actualRole = mySelfPage.role.getText();
+                Assert.assertTrue(actualRole.contains(expectedRole.trim()));
+//                verify team
+                String expectedTeam = user.get("team");
+                String actualTeam = mySelfPage.team.getText();
+                Assert.assertEquals(expectedTeam.trim(), actualTeam);
+//                verify campus
+                String expectedCampus = user.get("campus");
+                String actualCampus = mySelfPage.campus.getText();
+                Assert.assertEquals(expectedCampus, actualCampus);
+//                verify batch
+                String expectedBatch= user.get("batch");
+                String actualBatch = mySelfPage.batch.getText();
+                Assert.assertEquals(expectedBatch, actualBatch);
+
+                // once the testing is done for current user, stop executing the method so that
+                // execution will not reach the assertion fail below
+                return;
+            }
+
 
         }
-
-        // get the actual information from UI
-        // compare
-
+        // will execute only if the current email is not found in the excel data
+        Assert.fail(SignInPage.currentUserEmail + " was not found in the test data");
 
     }
 
