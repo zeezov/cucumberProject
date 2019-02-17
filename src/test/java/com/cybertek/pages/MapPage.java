@@ -11,11 +11,6 @@ import java.util.List;
 
 public class MapPage extends NavigationMenu {
 
-    public MapPage() {
-        PageFactory.initElements(Driver.getDriver(),
-                this);
-    }
-
     @FindBy(tagName = "h1")
     public WebElement header;
 
