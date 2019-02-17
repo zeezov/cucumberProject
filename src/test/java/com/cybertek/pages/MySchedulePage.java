@@ -43,7 +43,22 @@ public class MySchedulePage extends NavigationMenu {
      * @return
      */
     public boolean isCellBlockAvailable(String startTime, int addDays) {
-        return getCell(startTime, addDays).getAttribute("class").contains("conference");
+        return !getCell(startTime, addDays).getAttribute("class").contains("conference");
+    }
+
+    /**
+     * tells if there is any available block for that day based days count starting from today up to 7 days.
+     * 0 means today, 1 means tomorrow, 2 means day after tomorrow etc
+     * @param addDays
+     * @return
+     */
+    public boolean isDayAvailable(int addDays){
+        for (WebElement cell: getCellsForDay(addDays)){
+            if (!cell.getAttribute("class").contains("conference")){
+                return  true;
+            }
+        }
+        return false;
     }
 
 
