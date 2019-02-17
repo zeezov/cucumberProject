@@ -21,6 +21,9 @@ public abstract class NavigationMenu {
     @FindBy(linkText = "schedule")
     public WebElement schedule;
 
+    @FindBy(linkText = "general")
+    public WebElement general;
+
     @FindBy(linkText = "hunt")
     public WebElement hunt;
 
@@ -46,6 +49,18 @@ public abstract class NavigationMenu {
         Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(my).perform();
         team.click();
+    }
+
+    public void goToMySchedule() {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(schedule).perform();
+        my.click();
+    }
+
+    public void goToGeneralSchedule() {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(schedule).perform();
+        schedule.click();
     }
 
     public void signOut() {
