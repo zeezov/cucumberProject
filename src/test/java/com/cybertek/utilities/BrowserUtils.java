@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
 import java.util.*;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -136,6 +137,21 @@ public class BrowserUtils {
 
         }
     }
+
+    /**
+     * Verifies whether the element matching the provided locator is NOT displayed on page
+     * fails if the element matching the provided locator is not found or not displayed
+     * @param by
+     */
+    public static void verifyElementNotDisplayed(By by) {
+        try {
+            assertFalse("Element should not be visible: "+by, Driver.getDriver().findElement(by).isDisplayed());
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     /**
      * Verifies whether the element is displayed on page

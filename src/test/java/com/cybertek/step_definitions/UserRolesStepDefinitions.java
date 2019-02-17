@@ -1,13 +1,14 @@
 package com.cybertek.step_definitions;
 
+import com.cybertek.pages.HuntPage;
+import com.cybertek.pages.MySchedulePage;
 import com.cybertek.pages.SignInPage;
-import com.cybertek.utilities.ApplicationConstants;
-import com.cybertek.utilities.ConfigurationReader;
-import com.cybertek.utilities.Driver;
-import com.cybertek.utilities.UserUtility;
+import com.cybertek.utilities.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.util.Map;
 
@@ -43,27 +44,42 @@ public class UserRolesStepDefinitions {
 
     @Given("there are available spots for scheduling")
     public void there_are_available_spots_for_scheduling() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        MySchedulePage mySchedulePage = new MySchedulePage();
+        mySchedulePage.goToMySchedule();
+        // see if there is availabe spots for tomorrow 7:00
+        System.out.println(mySchedulePage.isCellBlockAvailable("9:00pm", 0));
+
     }
 
     @When("the user hunts for a spot")
     public void the_user_hunts_for_a_spot() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        HuntPage huntPage = new HuntPage();
+        huntPage.hunt.click();
+
+        String today = DateUtility.todaysDate();
+        huntPage.date.sendKeys(today);
+        BrowserUtils.waitForPageToLoad(5);
+        BrowserUtils.wait(10);
+        huntPage.selectFrom("8:00pm");
+        BrowserUtils.waitForPageToLoad(5);
+
+        BrowserUtils.wait(2);
+        huntPage.selectTo("9:00pm");
+        BrowserUtils.wait(5);
+        huntPage.search.click();
+
     }
 
     @Then("book button should not be displayed")
     public void book_button_should_not_be_displayed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        BrowserUtils.verifyElementNotDisplayed(By.tagName("button"));
     }
 
 
     @Then("book button should be displayed")
     public void book_button_should_be_displayed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        BrowserUtils.verifyElementDisplayed(By.tagName("button"));
+
     }
 
 

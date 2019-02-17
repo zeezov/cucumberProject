@@ -16,6 +16,9 @@ public class HuntPage extends NavigationMenu {
     @FindBy(css = "#mat-select-1 .mat-select-arrow")
     public WebElement to;
 
+    @FindBy(css = ".mat-icon.material-icons")
+    public WebElement search;
+
     public void selectFrom(String startTime){
         from.click();
         String xpath = "//span[contains(.,'"+startTime+"')]";
