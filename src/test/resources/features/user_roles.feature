@@ -1,13 +1,11 @@
 Feature: User roles
     # in the given you need to figure out a way to find out if there are any available spots
 
-  # cmd+shift+f   ---> search in project
   # ctrl+shift+f   ---> search in project
 
-    # cmd+shift+r   ---> search in project
   # ctrl+shift+r   ---> search in project
 
-
+@wip
   Scenario Outline: login as <user> type
     Given the user logs in as a light-side <user>
     And there are available spots for scheduling

@@ -55,19 +55,9 @@ public class UserRolesStepDefinitions {
     public void the_user_hunts_for_a_spot() {
         HuntPage huntPage = new HuntPage();
         huntPage.hunt.click();
-
         String today = DateUtility.todaysDate();
         huntPage.date.sendKeys(today);
-        BrowserUtils.waitForPageToLoad(5);
-        BrowserUtils.wait(10);
-        huntPage.selectFrom("8:00pm");
-        BrowserUtils.waitForPageToLoad(5);
-
-        BrowserUtils.wait(2);
-        huntPage.selectTo("9:00pm");
-        BrowserUtils.wait(5);
-        huntPage.search.click();
-
+        huntPage.getAvailableSessions(today, "8:00pm", "9:00pm");
     }
 
     @Then("book button should not be displayed")

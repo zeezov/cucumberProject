@@ -11,14 +11,8 @@ import java.util.List;
 
 public class MapPage extends NavigationMenu {
 
-    @FindBy(tagName = "h1")
-    public WebElement header;
-
     @FindBy(linkText = "map")
     public WebElement map;
-
-    @FindBy(className = "subtitle")
-    public WebElement location;
 
     @FindBy(css = "a>span.room-name")
     public List<WebElement> allRooms;

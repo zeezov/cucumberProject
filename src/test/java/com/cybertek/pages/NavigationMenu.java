@@ -39,6 +39,13 @@ public abstract class NavigationMenu {
     @FindBy(linkText = "sign out")
     public WebElement signOut;
 
+    @FindBy(tagName = "h1")
+    public WebElement title;
+
+    @FindBy(className = "subtitle")
+    public WebElement subtitle;
+
+
     public void goToSelf() {
         Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(my).perform();
