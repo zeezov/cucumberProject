@@ -5,7 +5,7 @@ Feature: User roles
 
   # ctrl+shift+r   ---> search in project
 
-@wip
+
   Scenario Outline: login as <user> type
     Given the user logs in as a light-side <user>
     And there are available spots for scheduling

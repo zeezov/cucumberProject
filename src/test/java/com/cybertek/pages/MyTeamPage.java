@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.awt.peer.TextComponentPeer;
 import java.util.List;
 
 public class MyTeamPage extends NavigationMenu {
@@ -16,4 +17,6 @@ public class MyTeamPage extends NavigationMenu {
 	public List<WebElement> allRoles;
 
 
+	@FindBy(xpath = "//h1[.='team']/../h2")
+	public WebElement teamName;
 }
