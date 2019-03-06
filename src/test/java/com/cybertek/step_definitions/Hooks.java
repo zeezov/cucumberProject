@@ -1,5 +1,6 @@
 package com.cybertek.step_definitions;
 
+import com.cybertek.utilities.DatabaseUtility;
 import com.cybertek.utilities.Driver;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -39,6 +40,15 @@ public class Hooks {
     public void setUpTeacher(){
         System.out.println("Set up teacher test");
     }
-}    //  BREAK some time around 9.10 pm est. UPDATE YOUR CODE. I ALREADY PUSHED IT TO GITHUB
-    // git fetch origin
-    //git reset --hard origin/master
+
+    @Before(value = "@db")
+    public void setUpDBConnection(){
+        DatabaseUtility.createConnection();
+    }
+
+    @After(value = "db")
+    public void closeDBConnection(){
+        DatabaseUtility.closeConnection();
+    }
+
+}
