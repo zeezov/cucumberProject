@@ -2,14 +2,18 @@ package com.cybertek.step_definitions;
 
 import com.cybertek.pages.MySelfPage;
 import com.cybertek.pages.MyTeamPage;
+import com.cybertek.pages.SignInPage;
 import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.DatabaseUtility;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class BackendTestStepDefinitions {
 
@@ -75,11 +79,11 @@ public class BackendTestStepDefinitions {
                 "FROM users u " +
                 "JOIN team t " +
                 "ON t.id =u.team_id " +
-                "WHERE email = '"+email+"';";
+                "WHERE email = 'mstacey8r@imdb.com';";
         Map<String, Object> userInfo = DatabaseUtility.getRowMap(sql);
 
         System.out.println(userInfo);
-        String eName = userInfo.get("firstname") + " " +userInfo.get("lastname");
+        String eName = userInfo.get("firstname") + " " + userInfo.get("lastname");
         String eTeam = userInfo.get("name").toString();
         System.out.println(eName);
         System.out.println(eTeam);
@@ -89,6 +93,26 @@ public class BackendTestStepDefinitions {
         Assert.assertEquals(eName, mySelfPage.name.getText());
         Assert.assertEquals(eTeam, mySelfPage.team.getText());
 
+    }
+
+    @When("user logs in any user")
+    public void user_logs_in_any_user() {
+        // get the size of the table
+        Long count = (Long) DatabaseUtility.getCellValue("select count (*) from users;");
+        System.out.println(count);
+        // generate random number in that scope
+        double rand = Math.random() * count + 1;
+        System.out.println(rand);
+        String sql = "select firstname, lastname, email from users limit 1 offset " + rand + ";";
+        Map<String, Object> userInfo = DatabaseUtility.getRowMap(sql);
+        System.out.println(userInfo);
+        String password = ((String)userInfo.get("firstname")+userInfo.get("lastname")).toLowerCase();
+        String email  = (String) userInfo.get("email");
+        System.out.println(email);
+        System.out.println(password);
+
+        SignInPage signInPage = new SignInPage();
+        signInPage.login(email, password);
     }
 
 

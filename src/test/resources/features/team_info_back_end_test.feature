@@ -12,9 +12,26 @@ Feature: Team information back end
     And all rooms have a clusters id in room table
     Then all the clusters ids must be from the clusters table
 
-  @db @wip
+  @db
   Scenario: verify user information per database
     Given user on the login page
     When user logs in using "mstacey8r@imdb.com" and "skylargiblin"
     When the user goes to the "my self" page
     Then correct user information should be displayed for "mstacey8r@imdb.com"
+
+  @wip @db
+  Scenario: Verify any user login
+    Given user on the login page
+    When user logs in any user
+    Then homepage should be displayed
+
+
+
+
+
+
+
+
+
+
+
