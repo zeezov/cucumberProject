@@ -1,5 +1,6 @@
 package com.cybertek.step_definitions;
 
+import com.cybertek.pages.MySelfPage;
 import com.cybertek.pages.MyTeamPage;
 import com.cybertek.utilities.BrowserUtils;
 import com.cybertek.utilities.DatabaseUtility;
@@ -8,6 +9,7 @@ import cucumber.api.java.en.Then;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.Map;
 
 public class BackendTestStepDefinitions {
 
@@ -65,6 +67,28 @@ public class BackendTestStepDefinitions {
         for (Object o : roomTable) {
             Assert.assertTrue(clusterTable.contains(o));
         }
+    }
+
+    @Then("correct user information should be displayed for {string}")
+    public void correct_user_information_should_be_displayed_for(String email) {
+        String sql = "SELECT firstname, lastname, t.name " +
+                "FROM users u " +
+                "JOIN team t " +
+                "ON t.id =u.team_id " +
+                "WHERE email = '"+email+"';";
+        Map<String, Object> userInfo = DatabaseUtility.getRowMap(sql);
+
+        System.out.println(userInfo);
+        String eName = userInfo.get("firstname") + " " +userInfo.get("lastname");
+        String eTeam = userInfo.get("name").toString();
+        System.out.println(eName);
+        System.out.println(eTeam);
+
+        MySelfPage mySelfPage = new MySelfPage();
+
+        Assert.assertEquals(eName, mySelfPage.name.getText());
+        Assert.assertEquals(eTeam, mySelfPage.team.getText());
+
     }
 
 
