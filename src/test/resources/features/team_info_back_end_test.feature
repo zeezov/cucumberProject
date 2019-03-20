@@ -1,12 +1,13 @@
 Feature: Team information back end
- @db
+
+  @db
   Scenario: Team members db test
     Given user on the login page
     When user logs in using "mstacey8r@imdb.com" and "skylargiblin"
     When the user goes to the "my team" page
     Then team information should match database records
 
-   @db
+  @db
   Scenario: Verify rooms and clusters
     Given there is a list of clusters in the clusters table
     And all rooms have a clusters id in room table
@@ -19,7 +20,10 @@ Feature: Team information back end
     When the user goes to the "my self" page
     Then correct user information should be displayed for "mstacey8r@imdb.com"
 
-  @wip @db
+    # in this test we are getting the user information from database
+  # we wrote a query that pulls information of a different user from db every
+  # time we run the test
+  @db
   Scenario: Verify any user login
     Given user on the login page
     When user logs in any user
