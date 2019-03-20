@@ -302,5 +302,21 @@ public class BrowserUtils {
         jse.executeScript(command);
 
     }
+
+
+    /**
+     * Parse and return Integers from String
+     */
+    public static Integer parserInteger(String text){
+        char[] c = text.toCharArray();
+        String result ="";
+        for (char character :c
+                ) {
+            if(Character.isDigit(character)){
+                result+=character;
+            }
+        }
+        return Integer.valueOf(result);
+    }
 }
 
