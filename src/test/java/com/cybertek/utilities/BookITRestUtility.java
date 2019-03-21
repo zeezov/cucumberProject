@@ -7,11 +7,6 @@ import static io.restassured.RestAssured.given;
 
 public class BookITRestUtility {
 
-    public static void main(String[] args) {
-        System.out.println(getTeacherToken());
-        System.out.println(getStudentToken());
-    }
-
     private static String teacherToken;
     private static String studentToken;
 
