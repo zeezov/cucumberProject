@@ -8,11 +8,13 @@ import cucumber.api.java.en.When;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 
 public class CreateUserAPIStepDefs {
 
     String token;
+    Response postResponse;
 
     @Given("the user has access token as a student")
     public void the_user_has_access_token_as_a_student() {
@@ -33,7 +35,7 @@ public class CreateUserAPIStepDefs {
         String campus = "VA";
 
 
-        Response post = given().
+        postResponse = given().
                 header("Authorization", token).
                 queryParam("first-name", firstName).
                 queryParam("last-name", lastName).
@@ -45,14 +47,28 @@ public class CreateUserAPIStepDefs {
                 queryParam("team-name", teamName).
                 when().
                 post("/api/students/student");
-        post.then().log().status();
 
     }
 
     @Then("the new student should not be created")
     public void the_new_student_should_not_be_created() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new cucumber.api.PendingException();
+        postResponse.then().log().all();
+        postResponse.then().assertThat().statusCode(403).
+                body(containsString("only teacher allowed to modify database."));
+
+    }
+
+    @Given("the user has access token as a teacher")
+    public void the_user_has_access_token_as_a_teacher() {
+        token = BookITRestUtility.getTeacherToken();
+    }
+
+    @Then("the new student should be created")
+    public void the_new_student_should_be_created() {
+        postResponse.then().log().all();
+        postResponse.then().assertThat().statusCode(201).
+                body(containsString("has been added to database"));
+
     }
 
 }
