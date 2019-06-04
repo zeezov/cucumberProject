@@ -68,7 +68,7 @@ public class HomePageStepDefinitions {
     }
 
     @When("user logs in as a team member")
-    public void user_logs_in_as_a_team_member() {
+    public void  user_logs_in_as_a_team_member() {
         System.out.println("I am logging in as member");
 
         SignInPage signInPage = new SignInPage();
